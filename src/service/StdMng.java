@@ -1,44 +1,11 @@
+package service;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.Student;
 
-
-class Student {
-    private int numTotal=0;
-    private int id;
-    private String name;
-    private int age;
-    Scanner scn = new Scanner(System.in);
-
-    public Student(int id, String name, int age){
-        this.id=id;
-        this.name=name;
-        this.age=age;
-        numTotal++;
-    }
-
-    public int getID(){
-        return id;
-    }
-
-    public String getName(){return name;}
-
-    public int getAge(){return age;}
-
-    public void setName(String name){
-        this.name=name;
-    }
-
-    public void setAge(int age){
-        this.age=age;
-    }
-
-    public void display(){
-        System.out.printf("ID: %d%nName: %s%nAge: %d%n", id,name,age);
-    }
-}
-
-class StdMng {
+public class StdMng {
     Scanner scn = new Scanner(System.in);
     ArrayList<Student> students = new ArrayList<>();
     private static final String FILE_NAME = "students.txt";
@@ -142,45 +109,3 @@ class StdMng {
     }
 }
 
-
-public class Main {
-    public static void main(String[] args) {
-
-        int choice = 0;
-        StdMng obj = new StdMng();
-        Scanner scn = new Scanner(System.in);
-        while(true) {
-            System.out.printf("\nHello and welcome!\n" +
-                    "What would you like to do today?\n" +
-                    "1. Add Student ID\n" +
-                    "2. Delete Student ID\n" +
-                    "3. Edit Student Info\n" +
-                    "4. Search\n" +
-                    "5. Exit\n" +
-                    "\n Enter : ");
-            choice = scn.nextInt();
-
-            switch (choice) {
-                case 1:
-                    obj.addStd();
-                    break;
-                case 2:
-                    obj.dltStd();
-                    break;
-                case 3:
-                    obj.edtStd();
-                    break;
-                case 4:
-                    obj.srchStd();
-                    break;
-                case 5:
-                    obj.writeData();
-                    return;
-                default:
-                    System.out.printf("\nPlease enter correct choice");
-            }
-        }
-
-
-    }
-}
