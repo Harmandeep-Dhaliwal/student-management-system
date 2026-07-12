@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +21,10 @@ class Student {
         return id;
     }
 
+    public String getName(){return name;}
+
+    public int getAge(){return age;}
+
     public void setName(String name){
         this.name=name;
     }
@@ -36,7 +41,36 @@ class Student {
 class StdMng {
     Scanner scn = new Scanner(System.in);
     ArrayList<Student> students = new ArrayList<>();
+    private static final String FILE_NAME = "students.txt";
 
+    public StdMng(){
+        try(BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))){
+            String line;
+            while((line = br.readLine()) != null){
+                readData(line);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void readData(String data){
+        String[] parts = data.split(",");
+        Student std = new Student(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
+        students.add(std);
+    }
+
+    public void writeData(){
+        try (BufferedWriter br = new BufferedWriter(new FileWriter(FILE_NAME))){
+            for(Student s : students){
+                String data = (String.valueOf(s.getID())+","+s.getName()+","+String.valueOf(s.getAge()));
+                br.write(data);
+                br.newLine();
+            }
+        }catch (IOException e){
+            e.printStackTrace();;
+        }
+    }
 
     public void addStd(){
         System.out.printf("\nPlease enter following info:");
@@ -116,7 +150,7 @@ public class Main {
         StdMng obj = new StdMng();
         Scanner scn = new Scanner(System.in);
         while(true) {
-            System.out.printf("Hello and welcome!\n" +
+            System.out.printf("\nHello and welcome!\n" +
                     "What would you like to do today?\n" +
                     "1. Add Student ID\n" +
                     "2. Delete Student ID\n" +
@@ -140,6 +174,7 @@ public class Main {
                     obj.srchStd();
                     break;
                 case 5:
+                    obj.writeData();
                     return;
                 default:
                     System.out.printf("\nPlease enter correct choice");
