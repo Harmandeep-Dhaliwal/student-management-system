@@ -21,6 +21,25 @@ public class StdMng {
         }
     }
 
+    public void writeJSON(){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+                mapper.writeValue(new File("students.json"), students);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readJSON(){
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            students.clear();
+            students.addAll(mapper.readValue(new File("students.json"), new TypeReference<ArrayList<Student>>() {}));
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void readData(String data){
         String[] parts = data.split(",");
         Student std = new Student(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
