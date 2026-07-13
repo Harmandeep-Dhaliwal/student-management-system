@@ -34,7 +34,7 @@ public class Main {
                     obj.srchStd();
                     break;
                 case 5:
-                    obj.writeData();
+                    obj.exit();
                     return;
                 default:
                     System.out.printf("\nPlease enter correct choice");
