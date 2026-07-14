@@ -1,11 +1,14 @@
 package app;
-import java.io.*;
 import java.util.Scanner;
-import service.StdMng;
 
-public class Main {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import app.service.StdMng;
+@SpringBootApplication
+public class SMA {
     public static void main(String[] args) {
-
+        SpringApplication.run(SMA.class, args);
+        /**
         int choice = 0;
         StdMng obj = new StdMng();
         Scanner scn = new Scanner(System.in);
@@ -45,6 +48,6 @@ public class Main {
             }
         }
 
-
+        */
     }
 }

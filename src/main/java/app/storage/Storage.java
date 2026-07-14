@@ -1,6 +1,6 @@
-package storage;
+package app.storage;
 
-import model.Student;
+import app.model.Student;
 
 import java.util.ArrayList;
 

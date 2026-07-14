@@ -1,12 +1,12 @@
-package service;
+package app.service;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Student;
-import storage.*;
+import app.model.Student;
+import app.storage.*;
 
 public class StdMng {
     Scanner scn = new Scanner(System.in);
@@ -96,6 +96,10 @@ public class StdMng {
         storageJSON.save(students);
         storageTXT.save(students);
         storageSQL.save(students);
+    }
+
+    public ArrayList<Student> getList(){
+        return students;
     }
 }
 
