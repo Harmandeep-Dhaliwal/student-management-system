@@ -12,10 +12,31 @@ public class sqlStorage implements Storage {
 
     public sqlStorage(){
         String url = "jdbc:sqlite:students.db";
-        try{con = DriverManager.getConnection(url);}
+        try{
+            con = DriverManager.getConnection(url);
+            System.out.println("Connected!");
+            System.out.println(System.getProperty("user.dir"));
+        }
         catch (SQLException e){
             e.printStackTrace();
         }
+        createTable();
+    }
+
+    private void createTable() {
+        try {
+
+            PreparedStatement ps = con.prepareStatement("CREATE TABLE IF NOT EXISTS student (\n" +
+                    "    id INTEGER PRIMARY KEY,\n" +
+                    "    name TEXT NOT NULL,\n" +
+                    "    age INTEGER NOT NULL\n" +
+                    ");");
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -41,7 +62,7 @@ public class sqlStorage implements Storage {
     public ArrayList<Student> load(){
         ArrayList<Student> students = new ArrayList<>();
         try{
-            PreparedStatement ps = con.prepareStatement("SELECT * FROMT student");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM student");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 Student s = new Student(rs.getInt("id"), rs.getString("name"), rs.getInt("age"));

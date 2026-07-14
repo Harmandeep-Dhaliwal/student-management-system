@@ -13,10 +13,12 @@ public class StdMng {
     ArrayList<Student> students = new ArrayList<>();
     Storage storageJSON = new jsonStorage();
     Storage storageTXT = new txtStorage();
+    Storage storageSQL = new sqlStorage();
 
     public StdMng() {
-        students = storageJSON.load();
-        // students = storageTXT.load();
+        students = storageSQL.load();
+        //students = storageJSON.load();
+        //students = storageTXT.load();
     }
 
     public void addStd() {
@@ -80,7 +82,7 @@ public class StdMng {
         return null;
     }
 
-    private void DisplayAll() {
+    public void displayAll() {
         if (students.isEmpty()) {
             System.out.println("No Students!");
             return;
@@ -93,6 +95,7 @@ public class StdMng {
     public void exit() {
         storageJSON.save(students);
         storageTXT.save(students);
+        storageSQL.save(students);
     }
 }
 

@@ -16,7 +16,8 @@ public class Main {
                     "2. Delete Student ID\n" +
                     "3. Edit Student Info\n" +
                     "4. Search\n" +
-                    "5. Exit\n" +
+                    "5. Display All\n" +
+                    "6. Exit\n" +
                     "\n Enter : ");
             choice = scn.nextInt();
 
@@ -34,6 +35,9 @@ public class Main {
                     obj.srchStd();
                     break;
                 case 5:
+                    obj.displayAll();
+                    break;
+                case 6:
                     obj.exit();
                     return;
                 default:
